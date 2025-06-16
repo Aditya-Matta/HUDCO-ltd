@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "dev" : "npm run dev"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "tailwindcss": "^4.1.10"
+  }
+}

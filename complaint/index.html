@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Portal</title>
+    <link rel="stylesheet" href="src/output.css">
+</head>
+<body id ="body" class="flexjustify-center min-h-screen">
+    
+    <div class="p-8 w-full">
+        <h2 class="text-center text-4xl mb-6 font-bold">Complaint Form</h2>
+        <form>
+            <div class="mb-6">
+                
+                <label class="block text-lg font-medium mb-2" for="">EmployeeID</label>
+                <input class="border-2 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" type="text" name="EmployeeID" placeholder="Enter your Employee ID" id=""required/>
+            </div> 
+            <div class="mb-6">
+                <label class="block text-lg font-medium mb-2" for="">Department:</label>
+                <select name="Department" class="p-2 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <option value="">--Please choose your department--</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Admin">Admin</option>
+                    <option value="HR">HR</option>
+                    <option value="IT">IT</option>
+                </select>
+            </div>
+            <div class="mb-6">
+                <label class="block text-lg font-medium mb-2" for="">Complaint Details</label>
+                <textarea class="border-2 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" name="Complaint Details" id="" rows="6" cols="60" required>Give details of your complaint</textarea>
+            </div>
+            <button class="bg-blue-600 text-white text-lg px-10 py-2 rounded-md hover:bg-blue-700 cursor-pointer duration-200 ease-out" type="submit" id="submit">Submit</button>
+            
+        </form>
+    </div>
+</body>
+<script>
+    const body = document.getElementById("body")
+    const submit = document.getElementById("submit")
+    submit.addEventListener("click", (e) => {
+        body.innerHTML = "<h1 class='flex justify-center text-lg'>Your complaint has been registered!<h1/>"
+    })
+</script>
+</html>
