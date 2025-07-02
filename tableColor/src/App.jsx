@@ -2,78 +2,123 @@ import { useState } from "react"
 
 
 function App() {
-  const [color, setColor] = useState("black")
+  const [extremeColor, setExtremeColor] = useState("red")
+  const [moderateColor, setModerateColor] = useState("yellow")
+  const [lowColor, setLowColor] = useState("green")
+
+  const data = [
+    { id: 1, zone: "Zone A", level: "Extreme" },
+    { id: 2, zone: "Zone B", level: "Moderate" },
+    { id: 3, zone: "Zone C", level: "Low" },
+    { id: 4, zone: "Zone D", level: "Extreme" },
+    { id: 5, zone: "Zone E", level: "Low" },
+    { id: 6, zone: "Zone F", level: "None" },
+  ]
+
+  const extremeOptions = ["red", "black", "maroon"]
+  const moderateOptions = ["yellow", "orange", "gold"]
+  const lowOptions = ["green", "lightgreen", "aqua"]
+
+  const getTextColor = (bg) => {
+    const lightColors = ["yellow", "gold", "lightgreen", "aqua", "khaki", "white"]
+    return lightColors.includes(bg.toLowerCase()) ? "black" : "white"
+  }
+
   return (
-      <>
-      <div className= "w-full h-screen duration-200"
-      style={{backgroundColor: color}}>
-        <h1 className="text-gray-800 flex flex-wrap font-serif p-5 text-4xl  justify-center top-10">Background Color Changer</h1>
-        <div className="fixed flex flex-wrap justify-center bottom-12 inset-x-0 px-2">
-          <div className="flex flex-wrap justify-center gap-3 shadow-lg bg-white rounded-3xl px-3 py-2">
-            <button
-            onClick={() => setColor("red")}
-            className="outline-none px-4 rounded-full text-white shadow-lg"
-            style={{backgroundColor: "red"}}
-            >Red</button>
-            <button
-            onClick={() => setColor("green")}
-            className="outline-none px-4 rounded-full text-white shadow-lg"
-            style={{backgroundColor: "green"}}
-            >Green</button>
-            <button
-            onClick={() => setColor("blue")}
-            className="outline-none px-4 rounded-full text-white shadow-lg"
-            style={{backgroundColor: "blue"}}
-            >Blue</button>
-            <button
-            onClick={() => setColor("white")}
-            className="outline-none px-4 rounded-full text-black shadow-lg"
-            style={{backgroundColor: "white"}}
-            >White</button>
-            <button
-            onClick={() => setColor("lavender")}
-            className="outline-none px-4 rounded-full text-black shadow-lg"
-            style={{backgroundColor: "lavender"}}
-            >lavender</button>
-            <button
-            onClick={() => setColor("aqua")}
-            className="outline-none px-4 rounded-full text-black shadow-lg"
-            style={{backgroundColor: "aqua"}}
-            >Aqua</button>
-            <button
-            onClick={() => setColor("olive")}
-            className="outline-none px-4 rounded-full text-white shadow-lg"
-            style={{backgroundColor: "olive"}}
-            >Olive</button>
-            <button
-            onClick={() => setColor("black")}
-            className="outline-none px-4 rounded-full text-white shadow-lg"
-            style={{backgroundColor: "black"}}
-            >Black</button>
-            <button
-            onClick={() => setColor("pink")}
-            className="outline-none px-4 rounded-full text-black shadow-lg"
-            style={{backgroundColor: "pink"}}
-            >Pink</button>
-            <button
-            onClick={() => setColor("yellow")}
-            className="outline-none px-4 rounded-full text-black shadow-lg"
-            style={{backgroundColor: "yellow"}}
-            >Yellow</button>
-            <button
-            onClick={() => setColor("orange")}
-            className="outline-none px-4 rounded-full text-white shadow-lg"
-            style={{backgroundColor: "orange"}}
-            >Orange</button>
-            <button
-            onClick={() => setColor("turquoise")}
-            className="outline-none px-4 rounded-full text-white shadow-lg"
-            style={{backgroundColor: "turquoise"}}
-            >Turquoise</button>
+    <>
+      <div className="p-6 min-h-screen bg-gray-100">
+        <h1 className="text-3xl font-bold text-center mb-6">Hazard Zone Table</h1>
+
+        <table className="w-full text-center border shadow rounded mb-10">
+          <thead className="bg-gray-200">
+            <tr>
+              <th className="py-2 px-4 border">ID</th>
+              <th className="py-2 px-4 border">Zone</th>
+              <th className="py-2 px-4 border">Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((row) => {
+              const bgColor =
+                row.level === "Extreme"
+                  ? extremeColor
+                  : row.level === "Moderate"
+                  ? moderateColor
+                  : row.level === "Low"
+                  ? lowColor
+                  : "white"
+
+              const textColor = getTextColor(bgColor)
+
+              return (
+                <tr key={row.id} style={{ backgroundColor: bgColor, color: textColor }}>
+                  <td className="py-2 px-4 border">{row.id}</td>
+                  <td className="py-2 px-4 border">{row.zone}</td>
+                  <td className="py-2 px-4 border">{row.level}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+
+        {/* Color Selection Buttons */}
+        <div className="flex flex-wrap justify-center gap-10">
+          {/* Extreme */}
+          <div className="text-center">
+            <p className="mb-2 font-semibold">Extreme</p>
+            {extremeOptions.map((color) => (
+              <button
+                key={color}
+                onClick={(e) => setExtremeColor(color)}
+                className="px-4 py-2 m-1 rounded-full shadow"
+                style={{
+                  backgroundColor: color,
+                  color: getTextColor(color),
+                }}
+              >
+                {color.charAt(0).toUpperCase() + color.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {/* Moderate */}
+          <div className="text-center">
+            <p className="mb-2 font-semibold">Moderate</p>
+            {moderateOptions.map((color) => (
+              <button
+                key={color}
+                onClick={(e) => setModerateColor(color)}
+                className="px-4 py-2 m-1 rounded-full shadow"
+                style={{
+                  backgroundColor: color,
+                  color: getTextColor(color),
+                }}
+              >
+                {color.charAt(0).toUpperCase() + color.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {/* Low */}
+          <div className="text-center">
+            <p className="mb-2 font-semibold">Low</p>
+            {lowOptions.map((color) => (
+              <button
+                key={color}
+                onClick={(e) => setLowColor(color)}
+                className="px-4 py-2 m-1 rounded-full shadow"
+                style={{
+                  backgroundColor: color,
+                  color: getTextColor(color),
+                }}
+              >
+                {color.charAt(0).toUpperCase() + color.slice(1)}
+              </button>
+            ))}
           </div>
         </div>
       </div>
-      </>
+    </>
   )
 }
 
